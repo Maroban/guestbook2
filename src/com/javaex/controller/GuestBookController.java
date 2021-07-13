@@ -33,7 +33,7 @@ public class GuestBookController extends HttpServlet {
 			// guestList 불러오기
 			List<GuestbookVo> guestList = guestbookDao.getGuestbookList();
 
-			// Attribute()에 guestList 넣기
+			// request에 guestList 넣기
 			request.setAttribute("gList", guestList);
 
 			// Controller와 addList.jsp 포워드 하기
@@ -61,7 +61,7 @@ public class GuestBookController extends HttpServlet {
 			// 입력된 파라미터 값 꺼내기(no)
 			int no = Integer.parseInt(request.getParameter("no"));
 
-			// Attribute()에 no 데이터 넣기
+			// request에 no 데이터 넣기
 			request.setAttribute("no", no);
 
 			// Controller와 deleteForm.jsp 포워드 하기
