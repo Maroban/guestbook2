@@ -11,15 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javaex.dao.GuestbookDao;
+import com.javaex.util.WebUtil;
 import com.javaex.vo.GuestbookVo;
 
-@WebServlet("/gbc")  // 이 주소가 있어야 연결이 된다.
+@WebServlet("/gbc") // 이 주소가 있어야 연결이 된다.
 public class GuestBookController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//post 방식 사용 시 한글 깨짐 방지
+		// post 방식 사용 시 한글 깨짐 방지
 		request.setCharacterEncoding("UTF-8");
 
 		// 파라미터 action="값" 읽어오기.
@@ -37,8 +38,7 @@ public class GuestBookController extends HttpServlet {
 			request.setAttribute("gList", guestList);
 
 			// Controller와 addList.jsp 포워드 하기
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/addList.jsp");
-			rd.forward(request, response);
+			WebUtil.forward(request, response, "/WEB-INF/addList.jsp");
 
 		} else if ("insert".equals(action)) {
 
@@ -54,7 +54,7 @@ public class GuestBookController extends HttpServlet {
 			guestbookDao.insert(guestbookVo);
 
 			// 리다이렉트
-			response.sendRedirect("/guestbook2/gbc?action=addList");
+			WebUtil.redirect(request, response, "/guestbook2/gbc?action=addList");
 
 		} else if ("dform".equals(action)) {
 
@@ -65,8 +65,7 @@ public class GuestBookController extends HttpServlet {
 			request.setAttribute("no", no);
 
 			// Controller와 deleteForm.jsp 포워드 하기
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/deleteForm.jsp");
-			rd.forward(request, response);
+			WebUtil.forward(request, response, "/WEB-INF/deleteForm.jsp");
 
 		} else if ("delete".equals(action)) {
 
@@ -78,7 +77,7 @@ public class GuestBookController extends HttpServlet {
 			guestbookDao.delete(no, password);
 
 			// 리다이렉트
-			response.sendRedirect("/guestbook2/gbc?action=addList");
+			WebUtil.redirect(request, response, "/guestbook2/gbc?action=addList");
 		}
 
 	}
