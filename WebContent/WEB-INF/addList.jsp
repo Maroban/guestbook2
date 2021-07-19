@@ -1,13 +1,5 @@
-<%@page import="com.javaex.vo.GuestbookVo"%>
-<%@page import="java.util.List"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%
-// attribute() 데이터 가져오기
-List<GuestbookVo> guestList = (List<GuestbookVo>) request.getAttribute("gList");
-%>
-
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -37,26 +29,23 @@ List<GuestbookVo> guestList = (List<GuestbookVo>) request.getAttribute("gList");
   <br>
   <br>
 
-  <%
-  for (int i = 0; i < guestList.size(); i++) {
-  %>
-  <form action="" method="post">
-    <table border="1" width="550">
-      <tr>
-        <td><%=guestList.get(i).getNo()%></td>
-        <td><%=guestList.get(i).getName()%></td>
-        <td><%=guestList.get(i).getReg_date()%></td>
-        <td><a href="/guestbook2/gbc?action=dform&no=<%=guestList.get(i).getNo()%>">삭제</a></td>
-      </tr>
-      <tr>
-        <td colspan="4"><%=guestList.get(i).getContent()%></td>
-      </tr>
-    </table>
-  </form>
-  <br>
-  <%
-  }
-  %>
+  <c:forEach items="${gList}" var="gList">
+    <form action="" method="post">
+      <table border="1" width="550">
+        <tr>
+          <td>${gList.no}</td>
+          <td>${gList.name}</td>
+          <td>${gList.reg_date}</td>
+          <td><a href="/guestbook2/gbc?action=dform&no=${gList.no}">삭제</a></td>
+        </tr>
+        <tr>
+          <td colspan="4">${gList.content}</td>
+        </tr>
+      </table>
+    </form>
+    <br>
+  </c:forEach>
+
 
 </body>
 </html>

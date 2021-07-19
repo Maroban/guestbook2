@@ -1,10 +1,6 @@
-<%@page import="com.javaex.vo.GuestbookVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-//attribute() 데이터 가져오기
-int no = (int) request.getAttribute("no");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +12,7 @@ int no = (int) request.getAttribute("no");
 		<label>비밀번호</label>
 		<input type="password" name="pass" value="">
 		<button type="submit">확인</button>
-		<input type="hidden" name="no" value="<%=no%>">
+		<input type="hidden" name="no" value="${no}">
 		<input type="hidden" name="action" value="delete">
 	</form>
 
